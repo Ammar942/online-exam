@@ -1,0 +1,11 @@
+[
+  {
+    "question": "who ammar",
+    "answer": [
+      { "ans": "hello", "isTrue": "false" },
+      { "ans": "bye", "isTrue": "true" },
+      { "ans": "welcome", "isTrue": "false" },
+      { "ans": "byebye", "isTrue": "false" }
+    ]
+  }
+]
