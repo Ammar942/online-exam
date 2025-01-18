@@ -1,0 +1,59 @@
+[
+  {
+    "question": "Which new keyword in ES6 is used to declare a constant variable?",
+    "answer": [
+      { "ans": "var", "isTrue": "false" },
+      { "ans": "let", "isTrue": "false" },
+      { "ans": "const", "isTrue": "true" },
+      { "ans": "define", "isTrue": "false" }
+    ]
+  },
+  {
+    "question": "What is the correct syntax for defining a default parameter in a function?",
+    "answer": [
+      { "ans": "function greet(name = 'Guest') {}", "isTrue": "true" },
+      { "ans": "function greet(name : 'Guest') {}", "isTrue": "false" },
+      { "ans": "function greet(name => 'Guest') {}", "isTrue": "false" },
+      { "ans": "function greet(name ? 'Guest') {}", "isTrue": "false" }
+    ]
+  },
+  {
+    "question": "Which method is used to convert an array-like object to an actual array in ES6?",
+    "answer": [
+      { "ans": "Array.concat", "isTrue": "false" },
+      { "ans": "Array.from", "isTrue": "true" },
+      { "ans": "Array.of", "isTrue": "false" },
+      { "ans": "Array.slice", "isTrue": "false" }
+    ]
+  },
+  {
+    "question": "How do you import a default export in ES6?",
+    "answer": [
+      { "ans": "import { myModule } from './module.js';", "isTrue": "false" },
+      { "ans": "import default './module.js';", "isTrue": "false" },
+      { "ans": "import myModule from './module.js';", "isTrue": "true" },
+      { "ans": "require('./module.js');", "isTrue": "false" }
+    ]
+  },
+  {
+    "question": "Which of the following is a new feature in ES6?",
+    "answer": [
+      { "ans": "Arrow functions", "isTrue": "true" },
+      { "ans": "Callback functions", "isTrue": "false" },
+      { "ans": "Event listeners", "isTrue": "false" },
+      { "ans": "AJAX", "isTrue": "false" }
+    ]
+  },
+  {
+    "question": "What does the spread operator (...) do in ES6?",
+    "answer": [
+      {
+        "ans": "It spreads elements of an array into a new array or function arguments.",
+        "isTrue": "true"
+      },
+      { "ans": "It combines arrays into a single array.", "isTrue": "false" },
+      { "ans": "It filters elements of an array.", "isTrue": "false" },
+      { "ans": "It sorts elements of an array.", "isTrue": "false" }
+    ]
+  }
+]
