@@ -1,4 +1,6 @@
 $(document).ready(() => {
+  // localStorage.clear();
+  let currentUser;
   $("#goToSignup").on("click", () => {
     console.log("click");
     sliding.classList.remove("translate-x-0");
@@ -83,55 +85,41 @@ $(document).ready(() => {
     e.preventDefault();
     $(".err-msg").remove();
     $("input").removeClass("border-red-700");
-    const fName = $("#signUpFName").val();
-    const lName = $("#signUpLName").val();
-    const email = $("#signUpEmail").val();
-    const pass = $("#signUpPassword").val();
-    const confirmPass = $("#signUpConfirmPassword").val();
 
-    const nameRegex = /^[a-zA-Z ]{3,10}$/;
+    const email = $("#loginEmail").val();
+    const pass = $("#loginPassword").val();
     const emailRegex = /^[a-zA-Z0-9._]+@(gmail|yahoo|outlook)+\.[a-z]{2,4}$/;
+    let user = JSON.parse(localStorage.getItem(`${email}`));
+    console.log(email);
     let isValid = true;
-    // firstName Validation
-    if (!fName) {
-      isValid = false;
-      showErrorMsg("#signUpFName", "first name is required");
-    } else if (!nameRegex.test(fName)) {
-      isValid = false;
-      showErrorMsg("#signUpFName", "please enter a valid name");
-    }
-    // lastName Validation
-    if (!lName) {
-      isValid = false;
-      showErrorMsg("#signUpLName", "first name is required");
-    } else if (!nameRegex.test(lName)) {
-      isValid = false;
-      showErrorMsg("#signUpLName", "please enter a valid name");
-    }
     // email validation
     if (!email) {
       isValid = false;
-      showErrorMsg("#signUpEmail", "email is required");
+      showErrorMsg("#loginEmail", "email is required");
     } else if (!emailRegex.test(email)) {
       isValid = false;
       showErrorMsg(
-        "#signUpEmail",
+        "#loginEmail",
         "please enter a valid email (manosa.ammar@gmail.com)"
       );
+      // console.log(email, user.email);
+    } else if (!user || !(email === user.email)) {
+      isValid = false;
+      showErrorMsg("#loginEmail", "no account with this email please login");
     }
+    // pass validation
     if (!pass) {
       isValid = false;
-      showErrorMsg("#signUpPassword", "password is required");
-    }
-    if (pass !== confirmPass) {
+      showErrorMsg("#loginPassword", "password is required");
+    } else if (!(pass === user.pass)) {
       isValid = false;
-      showErrorMsg("#signUpConfirmPassword", "password not match");
+      showErrorMsg("#loginPassword", "incorrect password");
     }
     if (isValid) {
-      saveToLocalStorage(fName, lName, email, pass);
-      $("#signupForm")[0].reset();
+      // saveToLocalStorage(fName, lName, email, pass);
+      // currentUser = JSON.parse(localStorage.getItem(`${email}`));
+      $("#loginForm")[0].reset();
     }
-    console.log(JSON.parse(localStorage.getItem("marina@gmail.com")));
+    // console.log(currentUser);
   });
 });
-localStorage.clear();
