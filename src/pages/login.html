@@ -46,7 +46,7 @@
                 type="fName"
                 name="fName"
                 id="signUpFName"
-                class="mb-4 p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
+                class="p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
                 placeholder="Enter your First Name"
                 required
                 minlength="3"
@@ -62,7 +62,7 @@
                 type="lName"
                 name="lName"
                 id="signUpLName"
-                class="mb-4 p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
+                class="p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
                 placeholder="Enter your Last Name"
                 required
                 minlength="3"
@@ -78,7 +78,7 @@
                 type="email"
                 name="email"
                 id="signUpEmail"
-                class="mb-4 p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
+                class="p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
                 placeholder="Enter your email"
                 pattern="^[a-zA-Z0-9._]+@([a-zA-Z0-9]+\.)+[a-z]{2,4}$"
                 required
@@ -131,7 +131,9 @@
         >
           <h1 class="text-4xl font-bold capitalize">login</h1>
           <form
+            novalidate
             action=""
+            id="loginForm"
             class="grid grid-cols-1 gap-4 bg-gray-900 p-6 w-full max-w-md"
           >
             <div class="flex flex-col">
@@ -141,9 +143,11 @@
               <input
                 type="email"
                 name="email"
-                id="logInEmail"
+                id="loginEmail"
                 class="mb-4 p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
                 placeholder="Enter your email"
+                pattern="^[a-zA-Z0-9._]+@([a-zA-Z0-9]+\.)+[a-z]{2,4}$"
+                required
               />
             </div>
             <div class="flex flex-col">
@@ -151,8 +155,9 @@
                 >password</label
               >
               <input
+                required
                 type="password"
-                id="logInPassword"
+                id="loginPassword"
                 class="p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
                 placeholder="Enter your password"
               />
@@ -167,7 +172,7 @@
           <br />
           <button
             id="goToSignup"
-            class="signup capitalize font-normal cursor-pointer"
+            class="signup capitalize font-normal underline cursor-pointer"
           >
             create account
           </button>
