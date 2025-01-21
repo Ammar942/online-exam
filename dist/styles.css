@@ -578,6 +578,10 @@ video {
   margin-bottom: 1rem;
 }
 
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
 .mt-8 {
   margin-top: 2rem;
 }
@@ -727,6 +731,10 @@ video {
 
 .bg-gradient-to-tl {
   background-image: linear-gradient(to top left, var(--tw-gradient-stops));
+}
+
+.bg-gradient-to-b {
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
 
 .from-dark-purple {
@@ -897,6 +905,21 @@ video {
 .placeholder\:text-accent::placeholder {
   --tw-text-opacity: 1;
   color: rgb(180 139 156 / var(--tw-text-opacity, 1));
+}
+
+.hover\:bg-primary:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(85 26 103 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-accent:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(180 139 156 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-medium-purple:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(85 26 103 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:text-light-purple:hover {
