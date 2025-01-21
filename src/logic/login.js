@@ -111,7 +111,9 @@ $(document).ready(() => {
     if (!pass) {
       isValid = false;
       showErrorMsg("#loginPassword", "password is required");
-    } else if (!(pass === user.pass)) {
+    }
+    // /////////////////////////////////////////////////////////////////////p
+    if (!user || !(pass === user.pass)) {
       isValid = false;
       showErrorMsg("#loginPassword", "incorrect password");
     }
