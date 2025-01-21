@@ -19,6 +19,7 @@ module.exports = {
       accent: "#b48b9c",
       white: "#ffffff",
       transparent: colors.transparent,
+      red: colors.red,
     },
   },
   plugins: [],

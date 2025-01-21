@@ -10,7 +10,9 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+
     <link rel="stylesheet" href="../../dist/styles.css" />
+    <link rel="stylesheet" href="../styles/login.css" />
   </head>
   <body>
     <section class="login flex justify-center items-center h-[100vh] bg-beige">
@@ -31,7 +33,9 @@
         >
           <h1 class="text-4xl font-bold capitalize">sign up</h1>
           <form
+            novalidate
             action=""
+            id="signupForm"
             class="grid grid-cols-2 gap-4 bg-gray-900 p-6 w-full max-w-md"
           >
             <div class="flex flex-col">
@@ -44,6 +48,10 @@
                 id="signUpFName"
                 class="mb-4 p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
                 placeholder="Enter your First Name"
+                required
+                minlength="3"
+                maxlength="10"
+                pattern="^[a-zA-Z ]{3,10}$"
               />
             </div>
             <div class="flex flex-col">
@@ -56,6 +64,10 @@
                 id="signUpLName"
                 class="mb-4 p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
                 placeholder="Enter your Last Name"
+                required
+                minlength="3"
+                maxlength="10"
+                pattern="^[a-zA-Z ]{3,10}$"
               />
             </div>
             <div class="flex flex-col col-span-2">
@@ -68,6 +80,8 @@
                 id="signUpEmail"
                 class="mb-4 p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
                 placeholder="Enter your email"
+                pattern="^[a-zA-Z0-9._]+@([a-zA-Z0-9]+\.)+[a-z]{2,4}$"
+                required
               />
             </div>
             <div class="flex flex-col col-span-2">
@@ -86,13 +100,15 @@
                 >confirm password</label
               >
               <input
-                type="confirmPassword"
+                type="password"
                 id="signUpConfirmPassword"
                 class="p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
                 placeholder="Confirm your password"
               />
             </div>
             <button
+              type="submit"
+              id="signupSubmitBtn"
               class="col-span-2 btn p-2 bg-primary text-beige rounded-3xl shadow-md shadow-primary hover:shadow-lg hover:shadow-primary"
             >
               sign up
@@ -101,10 +117,10 @@
           <p class="font-thin">
             already have an account.
             <button
-              id="login"
+              id="goToLogin"
               class="signup capitalize font-normal underline cursor-pointer"
             >
-              sign up
+              login
             </button>
           </p>
         </div>
@@ -148,15 +164,13 @@
               login
             </button>
           </form>
-          <p class="font-thin">
-            already have an account.
-            <button
-              id="signup"
-              class="signup capitalize font-normal underline cursor-pointer"
-            >
-              sign up
-            </button>
-          </p>
+          <br />
+          <button
+            id="goToSignup"
+            class="signup capitalize font-normal cursor-pointer"
+          >
+            create account
+          </button>
         </div>
       </div>
     </section>

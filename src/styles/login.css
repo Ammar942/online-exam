@@ -1,0 +1,9 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.err-msg {
+  color: #b91c1c;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
