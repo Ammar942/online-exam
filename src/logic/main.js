@@ -1,3 +1,4 @@
+import getQuestions from "./getQuestion.js";
 $(document).ready(() => {
   // localStorage.clear();
   let currentUser;
@@ -124,10 +125,18 @@ $(document).ready(() => {
     }
     // console.log(currentUser);
   });
-  // navigate to login by ammar el amour
+  // navigate to login
   $(".btn")
     .eq(0)
     .on("click", () => {
       window.location.replace("./login.html");
+    });
+  // navigate to exam
+  $(".start-exam")
+    .eq(0)
+    .on("click", () => {
+      getQuestions();
+      console.log(333333);
+      window.location.replace("./exam.html");
     });
 });
