@@ -1,0 +1,19 @@
+.fail-section {
+  margin-top: 30px;
+  margin-left: 80px;
+}
+.img-container {
+  width: 400px;
+  height: 400px;
+  margin-bottom: 40px;
+}
+.btn:hover {
+  background-color: #7d3b92;
+}
+.spanaya {
+  color: #ff0000;
+}
+
+.txt {
+  margin-bottom: 50px;
+}

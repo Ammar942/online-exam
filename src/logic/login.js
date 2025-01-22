@@ -21,7 +21,7 @@ $(document).ready(() => {
     const pass = $("#signUpPassword").val();
     const confirmPass = $("#signUpConfirmPassword").val();
 
-    const nameRegex = /^[a-zA-Z ]{3,10}$/;
+    const nameRegex = /^[a-zA-Z]{3,10}$/;
     const emailRegex = /^[a-zA-Z0-9._]+@(gmail|yahoo|outlook)+\.[a-z]{2,4}$/;
     let isValid = true;
     // firstName Validation
@@ -124,4 +124,10 @@ $(document).ready(() => {
     }
     // console.log(currentUser);
   });
+  // navigate to login by ammar el amour
+  $(".btn")
+    .eq(0)
+    .on("click", () => {
+      window.location.replace("./login.html");
+    });
 });

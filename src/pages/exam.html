@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exam</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../dist/styles.css" />
+  </head>
+  <body>
+    <section class="login flex justify-center items-center h-[100vh] bg-beige">
+      <div
+        class="px-10 overflow-hidden h-[80%] w-[90%] rounded-3xl flex flex-col justify-center items-center gap-3 shadow-2xl capitalize text-primary shadow-accent bg-gradient-to-r from-accent via-secondary to-accent"
+      >
+        <div class="px-10 flex justify-between w-full">
+          <div>timer 00:20:00</div>
+          <p class="capitalize">exam</p>
+        </div>
+        <div id="ques-marked" class="w-full flex justify-between gap-5">
+          <div
+            id="Q"
+            class="p-2 w-[80%] flex flex-col justify-start self-start rounded-lg"
+          >
+            <div class="flex">
+              <p class="w-full lowercase mb-6">e7na bn3ml eh hna?</p>
+              <span><i class="fa-regular fa-font-awesome"></i></span>
+            </div>
+            <div class="flex flex-col gap-4 p-2 w-full">
+              <div class="p-1 rounded-lg border-2">
+                <input
+                  type="radio"
+                  name="answer"
+                  id=""
+                  class="accent-primary hover:accent-primary"
+                />
+                <label>answer 1</label>
+              </div>
+              <div class="p-1 rounded-lg border-2">
+                <input type="radio" name="answer" id="" />
+                <label>answer 2</label>
+              </div>
+              <div class="p-1 rounded-lg border-2">
+                <input type="radio" name="answer" id="" />
+                <label>answer 3</label>
+              </div>
+              <div class="p-1 rounded-lg border-2">
+                <input type="radio" name="answer" id="" />
+                <label>answer 4</label>
+              </div>
+            </div>
+            <div class="p-5 flex justify-center gap-36">
+              <button>
+                <i class="fa-solid fa-chevron-left text-2xl"></i>
+              </button>
+              <button>
+                <i class="fa-solid fa-chevron-right text-2xl"></i>
+              </button>
+            </div>
+            <button
+              class="w-fit py-2 px-4 rounded-lg bg-primary text-beige self-end"
+            >
+              submit
+            </button>
+          </div>
+          <div id="markedQ" class="p-2 rounded-lg bg-accent w-[40%]">
+            marked Q
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
