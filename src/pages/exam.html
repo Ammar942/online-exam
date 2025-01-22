@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Exam</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -19,7 +25,7 @@
         class="px-10 overflow-hidden h-[80%] w-[90%] rounded-3xl flex flex-col justify-center items-center gap-3 shadow-2xl capitalize text-primary shadow-accent bg-gradient-to-r from-accent via-secondary to-accent"
       >
         <div class="px-10 flex justify-between w-full">
-          <div>timer 00:20:00</div>
+          <div class="timer"></div>
           <p class="capitalize">exam</p>
         </div>
         <div id="ques-marked" class="w-full flex justify-between gap-5">
@@ -28,8 +34,10 @@
             class="p-2 w-[80%] flex flex-col justify-start self-start rounded-lg"
           >
             <div class="flex">
-              <p class="w-full lowercase mb-6">e7na bn3ml eh hna?</p>
-              <span><i class="fa-regular fa-font-awesome"></i></span>
+              <p class="questionTitle w-full lowercase mb-6"></p>
+              <span class="flag"
+                ><i class="flag-icon fa-regular fa-font-awesome"></i
+              ></span>
             </div>
             <div class="flex flex-col gap-4 p-2 w-full">
               <div class="p-1 rounded-lg border-2">
@@ -39,40 +47,44 @@
                   id=""
                   class="accent-primary hover:accent-primary"
                 />
-                <label>answer 1</label>
+                <label class="answer">answer 1</label>
               </div>
               <div class="p-1 rounded-lg border-2">
                 <input type="radio" name="answer" id="" />
-                <label>answer 2</label>
+                <label class="answer">answer 2</label>
               </div>
               <div class="p-1 rounded-lg border-2">
                 <input type="radio" name="answer" id="" />
-                <label>answer 3</label>
+                <label class="answer">answer 3</label>
               </div>
               <div class="p-1 rounded-lg border-2">
                 <input type="radio" name="answer" id="" />
-                <label>answer 4</label>
+                <label class="answer">answer 4</label>
               </div>
             </div>
             <div class="p-5 flex justify-center gap-36">
               <button>
-                <i class="fa-solid fa-chevron-left text-2xl"></i>
+                <i class="left fa-solid fa-chevron-left text-2xl"></i>
               </button>
               <button>
-                <i class="fa-solid fa-chevron-right text-2xl"></i>
+                <i class="right fa-solid fa-chevron-right text-2xl"></i>
               </button>
             </div>
             <button
-              class="w-fit py-2 px-4 rounded-lg bg-primary text-beige self-end"
+              class="submit w-fit py-2 px-4 rounded-lg bg-primary text-beige self-end"
             >
               submit
             </button>
           </div>
           <div id="markedQ" class="p-2 rounded-lg bg-accent w-[40%]">
-            marked Q
+            <p class="text-center mb-2">marked questions</p>
+            <hr class="text-primary w-full h-1" />
+            <div class="flagged flex flex-col justify-between gap-4"></div>
           </div>
         </div>
       </div>
     </section>
+    <script type="module" src="../logic/main.js"></script>
+    <script src="../logic/exam.js"></script>
   </body>
 </html>
