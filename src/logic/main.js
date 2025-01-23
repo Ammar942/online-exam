@@ -136,7 +136,6 @@ $(document).ready(() => {
     .eq(0)
     .on("click", () => {
       getQuestions();
-      console.log(333333);
       window.location.replace("./exam.html");
     });
 });
