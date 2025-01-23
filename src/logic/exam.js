@@ -23,27 +23,43 @@ console.log("🚀 ~ Question:", Question);
 let currentIndex = 0;
 function displayQuestions(i) {
   $(".flag-icon").removeClass("fa-brands");
-  $(".questionTitle")
-    .eq(0)
-    .html(`${Question[i || currentIndex].question}`);
-  if (Question[currentIndex].isFlagged) {
-    $(".flag-icon").addClass("fa-brands");
+  if (i === 0 || i) {
+    currentIndex = i;
+    $(".questionTitle").eq(0).html(`${Question[i].question}`);
+    if (Question[i].isFlagged) {
+      $(".flag-icon").addClass("fa-brands");
+    } else {
+      $(".flag-icon").removeClass("fa-brands");
+    }
+    $(".flag-icon");
+    $(".answer").eq(0).html(`${Question[i].answer[0].ans}`);
+    $(".answer").eq(1).html(`${Question[i].answer[1].ans}`);
+    $(".answer").eq(2).html(`${Question[i].answer[2].ans}`);
+    $(".answer").eq(3).html(`${Question[i].answer[3].ans}`);
   } else {
-    $(".flag-icon").removeClass("fa-brands");
+    $(".questionTitle")
+      .eq(0)
+      .html(`${Question[i || currentIndex].question}`);
+    if (Question[i || currentIndex].isFlagged) {
+      $(".flag-icon").addClass("fa-brands");
+    } else {
+      $(".flag-icon").removeClass("fa-brands");
+    }
+
+    $(".flag-icon");
+    $(".answer")
+      .eq(0)
+      .html(`${Question[i || currentIndex].answer[0].ans}`);
+    $(".answer")
+      .eq(1)
+      .html(`${Question[i || currentIndex].answer[1].ans}`);
+    $(".answer")
+      .eq(2)
+      .html(`${Question[i || currentIndex].answer[2].ans}`);
+    $(".answer")
+      .eq(3)
+      .html(`${Question[i || currentIndex].answer[3].ans}`);
   }
-  $(".flag-icon");
-  $(".answer")
-    .eq(0)
-    .html(`${Question[i || currentIndex].answer[0].ans}`);
-  $(".answer")
-    .eq(1)
-    .html(`${Question[i || currentIndex].answer[1].ans}`);
-  $(".answer")
-    .eq(2)
-    .html(`${Question[i || currentIndex].answer[2].ans}`);
-  $(".answer")
-    .eq(3)
-    .html(`${Question[i || currentIndex].answer[3].ans}`);
 }
 displayQuestions();
 $(".right")
@@ -95,19 +111,30 @@ function addToMarkedQ(Arr) {
    `);
   });
 }
+////////////////////////////////  clicking title   //////////////////////////////////
+
+$("#markedQ").on("click", ".questionTitleFlagged", function () {
+  let flagText = $(this).eq(0).html();
+  Question.forEach((q, i) => {
+    if (q.question === flagText) {
+      console.log(i, q.isFlagged);
+      displayQuestions(i);
+    }
+  });
+});
+////////////////////////////////  clicking Trash Icon   //////////////////////////////////
 $("#markedQ").on("click", ".trash", function () {
   let flagText = $(this).parent().siblings().eq(0).html();
   console.log("🚀 ~ flagText:", flagText);
-  flaggedQArr = flaggedQArr.filter((q, i) => {
+  flaggedQArr = flaggedQArr.filter((q) => {
     return q !== flagText;
   });
   Question.forEach((q) => {
     if (q.question === flagText) {
-      q.isFlagged = false; // Remove the flag
+      q.isFlagged = false;
     }
   });
   addToMarkedQ(flaggedQArr);
-  // $(this).parent().parent().remove();
   if (Question[currentIndex].question === flagText) {
     $(".flag-icon").removeClass("fa-brands");
   }
