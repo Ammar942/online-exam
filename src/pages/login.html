@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>login</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <link rel="stylesheet" href="../../dist/styles.css" />
+    <link rel="stylesheet" href="../styles/login.css" />
+  </head>
+  <body>
+    <section class="login flex justify-center items-center h-[100vh] bg-beige">
+      <div
+        class="relative overflow-hidden h-[80%] w-[90%] rounded-3xl flex shadow-2xl capitalize text-primary shadow-primary bg-secondary"
+      >
+        <!-- ?image Layer -->
+        <!-- ! rounded issues  -->
+        <div
+          id="sliding"
+          class="tran absolute top-0 left-0 h-full transform transition-transform duration-1000 ease-in-out rounded-3xl w-[50%] hidden md:flex justify-center items-center shadow-2xl shadow-medium-purple bg-gradient-to-r from-primary via-accent to-primary"
+        >
+          <img src="../../images/login.svg" alt="login" class="h-full" />
+        </div>
+        <!-- ?signup -->
+        <div
+          class="w-[100%] md:w-[50%] flex flex-col justify-center items-center py-4"
+        >
+          <h1 class="text-4xl font-bold capitalize">sign up</h1>
+          <form
+            novalidate
+            action=""
+            id="signupForm"
+            class="grid grid-cols-2 gap-4 p-6 w-full max-w-md"
+          >
+            <div class="flex flex-col">
+              <label class="text-primary capitalize text-sm font-semibold"
+                >first name</label
+              >
+              <input
+                type="text"
+                name="fName"
+                id="signUpFName"
+                class="p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
+                placeholder="Enter your First Name"
+                required
+                minlength="3"
+                maxlength="10"
+                pattern="^[a-zA-Z ]{3,10}$"
+              />
+            </div>
+            <div class="flex flex-col">
+              <label class="text-primary capitalize text-sm font-semibold"
+                >last name</label
+              >
+              <input
+                type="lName"
+                name="lName"
+                id="signUpLName"
+                class="p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
+                placeholder="Enter your Last Name"
+                required
+                minlength="3"
+                maxlength="10"
+                pattern="^[a-zA-Z ]{3,10}$"
+              />
+            </div>
+            <div class="flex flex-col col-span-2">
+              <label class="text-primary capitalize text-sm font-semibold"
+                >email</label
+              >
+              <input
+                type="email"
+                name="email"
+                id="signUpEmail"
+                class="p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
+                placeholder="Enter your email"
+                pattern="^[a-zA-Z0-9._]+@([a-zA-Z0-9]+\.)+[a-z]{2,4}$"
+                required
+              />
+            </div>
+            <div class="flex flex-col col-span-2">
+              <label class="text-primary capitalize text-sm font-semibold"
+                >password</label
+              >
+              <input
+                type="password"
+                id="signUpPassword"
+                class="p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
+                placeholder="Enter your password"
+              />
+            </div>
+            <div class="flex flex-col col-span-2">
+              <label class="text-primary capitalize text-sm font-semibold"
+                >confirm password</label
+              >
+              <input
+                type="password"
+                id="signUpConfirmPassword"
+                class="p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
+                placeholder="Confirm your password"
+              />
+            </div>
+            <!-- Remove btn class -->
+            <button
+              type="submit"
+              id="signupSubmitBtn"
+              class="col-span-2 p-2 bg-primary text-beige rounded-3xl shadow-md shadow-primary hover:shadow-lg hover:shadow-primary"
+            >
+              sign up
+            </button>
+          </form>
+          <p class="font-thin">
+            already have an account.
+            <button
+              id="goToLogin"
+              class="signup capitalize font-normal underline cursor-pointer"
+            >
+              login
+            </button>
+          </p>
+        </div>
+        <!--? login -->
+        <!--  bg-any except white did not work => because i override the tailwind configuration and all colors gone  -->
+        <div
+          class="w-[100%] md:w-[50%] flex flex-col justify-center items-center"
+        >
+          <h1 class="text-4xl font-bold capitalize">login</h1>
+          <form
+            novalidate
+            action=""
+            id="loginForm"
+            class="grid grid-cols-1 gap-4 bg-gray-900 p-6 w-full max-w-md"
+          >
+            <div class="flex flex-col">
+              <label class="text-primary capitalize text-sm font-semibold"
+                >email</label
+              >
+              <input
+                type="email"
+                name="email"
+                id="loginEmail"
+                class="mb-4 p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
+                placeholder="Enter your email"
+                pattern="^[a-zA-Z0-9._]+@([a-zA-Z0-9]+\.)+[a-z]{2,4}$"
+                required
+              />
+            </div>
+            <div class="flex flex-col">
+              <label class="text-primary capitalize text-sm font-semibold"
+                >password</label
+              >
+              <input
+                required
+                type="password"
+                id="loginPassword"
+                class="p-2 rounded-lg border-b-2 text-primary bg-transparent focus:outline-none focus:border-b-2 focus:bg-secondary focus:shadow-md focus:shadow-primary placeholder:text-accent"
+                placeholder="Enter your password"
+              />
+            </div>
+            <br />
+            <button
+              type="submit"
+              class="p-2 bg-primary text-beige rounded-3xl shadow-md shadow-primary hover:shadow-lg hover:shadow-primary"
+            >
+              login
+            </button>
+          </form>
+          <br />
+          <button
+            id="goToSignup"
+            class="signup capitalize font-normal underline cursor-pointer"
+          >
+            create account
+          </button>
+        </div>
+      </div>
+    </section>
+    <script type="module" src="../logic/main.js"></script>
+  </body>
+</html>
