@@ -47,8 +47,24 @@ function displayQuestions(i) {
     } else {
       $(".flag-icon").removeClass("fa-brands");
     }
+    // shuffledQuestions[i].answer.forEach((ans, index) => {
+    //   $(".answer").eq(index).html(`${ans.ans} bb`); //!updated in else case
+    // });
+    //empty answers container
+    $("#answers").eq(0).empty();
+    //loop for question Answers to append //!test this case
     shuffledQuestions[i].answer.forEach((ans, index) => {
-      $(".answer").eq(index).html(ans.ans);
+      // console.log(ans.ans, index);
+      $("#answers").eq(0)
+        .append(` <label class="answer"><div class="p-1 rounded-lg border-2">
+               <input
+                  type="radio"
+                  name="${shuffledQuestions[currentIndex].question}"
+                  value="${ans.ans}"
+                  class="ans-input accent-primary hover:accent-primary"
+                />
+                ${ans.ans}
+              </div></label> `);
     });
     // $(".flag-icon");
     // $(".answer").eq(0).html(`${Question[i].answer[0].ans}`);
@@ -66,8 +82,21 @@ function displayQuestions(i) {
     } else {
       $(".flag-icon").removeClass("fa-brands");
     }
+    //empty answers container
+    $("#answers").eq(0).empty();
+    //loop for question Answers to append
     shuffledQuestions[currentIndex].answer.forEach((ans, index) => {
-      $(".answer").eq(index).html(ans.ans);
+      // console.log(ans.ans, index);
+      $("#answers").eq(0)
+        .append(` <label class="answer"><div class="p-1 rounded-lg border-2">
+               <input
+                  type="radio"
+                  name="${shuffledQuestions[currentIndex].question}"
+                  value="${ans.ans}"
+                  class="ans-input accent-primary hover:accent-primary"
+                />
+                ${ans.ans}
+              </div></label> `);
     });
 
     // $(".flag-icon");
@@ -172,3 +201,47 @@ $("#markedQ").on("click", ".trash", function () {
     $(".flag-icon").removeClass("fa-brands");
   }
 });
+
+////////////////////////////////  save answers   //////////////////////////////////
+const studentAnswers = {}; //!set answer selected in ui
+$("#answers").on("change", ".ans-input", function (e) {
+  let questionIndexInOriginalObj;
+  console.log(shuffledQuestions);
+  Question.forEach((Q, i, Qs) => {
+    if (Q.question === e.target.name) {
+      questionIndexInOriginalObj = i;
+      console.log(questionIndexInOriginalObj);
+      studentAnswers[questionIndexInOriginalObj] = $(e.target).val();
+    }
+  });
+  console.log(studentAnswers);
+});
+
+////////////////////////////////  save answers in sessionStorage   //////////////////////////////////
+$(".submit").on("click", function () {
+  console.log("submit");
+  sessionStorage.setItem("studentAnswers", JSON.stringify(studentAnswers));
+  console.log(`your grade is ${calcGrades()} out of ${Question.length}`); //!grades 3la ma-tofrag
+});
+////////////////////////////////  calc grades   //////////////////////////////////
+function calcGrades() {
+  let grade = 0;
+  const correctAnswers = getCorrectAnswers();
+  const studentAnswers = JSON.parse(sessionStorage.getItem("studentAnswers"));
+
+  console.log(correctAnswers);
+  correctAnswers.forEach((ans, i) => {
+    if (ans === studentAnswers[i]) {
+      grade++;
+    }
+  });
+  return grade;
+}
+function getCorrectAnswers() {
+  let correctAnswer = [];
+  Question.forEach((ques, i) => {
+    correctAnswer.push(ques.answer.filter((ans) => ans.isTrue)[0].ans);
+    // console.log(correctAnswer);
+  });
+  return correctAnswer;
+}
