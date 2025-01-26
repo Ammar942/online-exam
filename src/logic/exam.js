@@ -56,9 +56,6 @@ function displayQuestions(i) {
     } else {
       $(".flag-icon").removeClass("fa-brands");
     }
-    // shuffledQuestions[i].answer.forEach((ans, index) => {
-    //   $(".answer").eq(index).html(`${ans.ans} bb`); //!updated in else case
-    // });
     //empty answers container
     $("#answers").eq(0).empty();
     //loop for question Answers to append //!test this case
@@ -222,11 +219,15 @@ $("#answers").on("change", ".ans-input", function (e) {
   console.log(studentAnswers);
 });
 
-////////////////////////////////  save answers in sessionStorage   //////////////////////////////////
+////////////////////////////////  save answers in localStorage   //////////////////////////////////
+let grades = [];
 $(".submit").on("click", function () {
   localStorage.setItem("studentAnswers", JSON.stringify(studentAnswers));
   console.log(`your grade is ${calcGrades()} out of ${Question.length}`); //!grades 3la ma-tofrag
-  let grade = calcGrades();
+  grades.push({ userEmail: `${currentUser.email}`, grade: currentUserGrade });
+  localStorage.setItem("AllUsersGrades", JSON.stringify(grades));
+  let currentUserGrade = calcGrades();
+  localStorage.setItem("grade", JSON.stringify(currentUserGrade));
   if (grade > Question.length / 2) {
     console.log("success");
     window.location.replace("./success.html");

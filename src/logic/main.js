@@ -1,6 +1,8 @@
 import getQuestions from "./getQuestion.js";
 $(document).ready(() => {
   // localStorage.clear();
+  let users = [];
+  users = JSON.parse(localStorage.getItem("users"));
   let currentUser;
   $("#goToSignup").on("click", () => {
     console.log("click");
@@ -80,18 +82,23 @@ $(document).ready(() => {
       email: email,
       pass: pass,
     };
-    localStorage.setItem(`${email}`, JSON.stringify(userInfo));
+    users.push(userInfo);
+    localStorage.setItem(`users`, JSON.stringify(users));
   };
 
   $("#loginForm").on("submit", (e) => {
     e.preventDefault();
     $(".err-msg").remove();
     $("input").removeClass("border-red-700");
-
+    let user;
     const email = $("#loginEmail").val();
     const pass = $("#loginPassword").val();
     const emailRegex = /^[a-zA-Z0-9._]+@(gmail|yahoo|outlook)+\.[a-z]{2,4}$/;
-    let user = JSON.parse(localStorage.getItem(`${email}`));
+    users.forEach((u, i) => {
+      if (email === u.email) {
+        user = u;
+      }
+    });
     console.log(email);
     let isValid = true;
     // email validation
@@ -106,6 +113,7 @@ $(document).ready(() => {
       );
       // console.log(email, user.email);
     } else if (!user || !(email === user.email)) {
+      console.log(user, email, user.email);
       isValid = false;
       showErrorMsg(
         "#loginEmail",
@@ -125,6 +133,8 @@ $(document).ready(() => {
     if (isValid) {
       // saveToLocalStorage(fName, lName, email, pass);
       // currentUser = JSON.parse(localStorage.getItem(`${email}`));
+      currentUser = user;
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
       $("#loginForm")[0].reset();
       window.location.replace("./startExam.html");
     }
