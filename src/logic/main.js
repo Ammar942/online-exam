@@ -1,6 +1,8 @@
 import getQuestions from "./getQuestion.js";
 $(document).ready(() => {
   // localStorage.clear();
+  let users = [];
+  users = JSON.parse(localStorage.getItem("users"));
   let currentUser;
   $("#goToSignup").on("click", () => {
     console.log("click");
@@ -63,6 +65,7 @@ $(document).ready(() => {
     if (isValid) {
       saveToLocalStorage(fName, lName, email, pass);
       $("#signupForm")[0].reset();
+      window.location.replace("./startExam.html");
     }
     console.log(JSON.parse(localStorage.getItem("marina@gmail.com")));
   });
@@ -79,18 +82,23 @@ $(document).ready(() => {
       email: email,
       pass: pass,
     };
-    localStorage.setItem(`${email}`, JSON.stringify(userInfo));
+    users.push(userInfo);
+    localStorage.setItem(`users`, JSON.stringify(users));
   };
 
   $("#loginForm").on("submit", (e) => {
     e.preventDefault();
     $(".err-msg").remove();
     $("input").removeClass("border-red-700");
-
+    let user;
     const email = $("#loginEmail").val();
     const pass = $("#loginPassword").val();
     const emailRegex = /^[a-zA-Z0-9._]+@(gmail|yahoo|outlook)+\.[a-z]{2,4}$/;
-    let user = JSON.parse(localStorage.getItem(`${email}`));
+    users.forEach((u, i) => {
+      if (email === u.email) {
+        user = u;
+      }
+    });
     console.log(email);
     let isValid = true;
     // email validation
@@ -105,8 +113,12 @@ $(document).ready(() => {
       );
       // console.log(email, user.email);
     } else if (!user || !(email === user.email)) {
+      console.log(user, email, user.email);
       isValid = false;
-      showErrorMsg("#loginEmail", "no account with this email please login");
+      showErrorMsg(
+        "#loginEmail",
+        "no account with this email please create account"
+      );
     }
     // pass validation
     if (!pass) {
@@ -114,14 +126,17 @@ $(document).ready(() => {
       showErrorMsg("#loginPassword", "password is required");
     }
     // /////////////////////////////////////////////////////////////////////p
-    if (!user || !(pass === user.pass)) {
+    else if (!user || !(pass === user.pass)) {
       isValid = false;
       showErrorMsg("#loginPassword", "incorrect password");
     }
     if (isValid) {
       // saveToLocalStorage(fName, lName, email, pass);
       // currentUser = JSON.parse(localStorage.getItem(`${email}`));
+      currentUser = user;
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
       $("#loginForm")[0].reset();
+      window.location.replace("./startExam.html");
     }
     // console.log(currentUser);
   });
@@ -129,7 +144,7 @@ $(document).ready(() => {
   $(".btn")
     .eq(0)
     .on("click", () => {
-      window.location.replace("./login.html");
+      window.location.replace("./startExam.html");
     });
   // navigate to exam
   $(".start-exam")
@@ -137,5 +152,6 @@ $(document).ready(() => {
     .on("click", () => {
       getQuestions();
       window.location.replace("./exam.html");
+      localStorage.removeItem("studentAnswers");
     });
 });

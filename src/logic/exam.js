@@ -10,13 +10,22 @@ function updateTimer() {
   if (remainingTime <= 60000) {
     $(".timer").eq(0).addClass("text-red-700");
   }
+  if (remainingTime <= 60000 && remainingTime >= 59000) {
+    console.log("🌲");
+    $(".overlay-time").removeClass("hidden");
+  }
   if (remainingTime <= 0) {
     clearInterval(timerInterval);
     $(".timer").eq(0).html("Time's up!");
+    window.location.replace("./timeout.html");
   }
 }
 updateTimer();
 timerInterval = setInterval(updateTimer, 1000);
+
+$(".ok").on("click", function () {
+  $(".overlay-time").addClass("hidden");
+});
 ////////////////////////////////////////////    display Questions   //////////////////////////////////////////
 const Question = JSON.parse(localStorage.getItem("Question"));
 let shuffledQuestions = [...Question].sort(() => Math.random() - 0.5);
@@ -47,9 +56,6 @@ function displayQuestions(i) {
     } else {
       $(".flag-icon").removeClass("fa-brands");
     }
-    // shuffledQuestions[i].answer.forEach((ans, index) => {
-    //   $(".answer").eq(index).html(`${ans.ans} bb`); //!updated in else case
-    // });
     //empty answers container
     $("#answers").eq(0).empty();
     //loop for question Answers to append //!test this case
@@ -213,10 +219,22 @@ $("#answers").on("change", ".ans-input", function (e) {
   console.log(studentAnswers);
 });
 
-////////////////////////////////  save answers in sessionStorage   //////////////////////////////////
+////////////////////////////////  save answers in localStorage   //////////////////////////////////
+let grades = [];
 $(".submit").on("click", function () {
   localStorage.setItem("studentAnswers", JSON.stringify(studentAnswers));
   console.log(`your grade is ${calcGrades()} out of ${Question.length}`); //!grades 3la ma-tofrag
+  grades.push({ userEmail: `${currentUser.email}`, grade: currentUserGrade });
+  localStorage.setItem("AllUsersGrades", JSON.stringify(grades));
+  let currentUserGrade = calcGrades();
+  localStorage.setItem("grade", JSON.stringify(currentUserGrade));
+  if (grade > Question.length / 2) {
+    console.log("success");
+    window.location.replace("./success.html");
+  } else {
+    console.log("fail");
+    window.location.replace("./fail.html");
+  }
 });
 ////////////////////////////////  calc grades   //////////////////////////////////
 function calcGrades() {
