@@ -23,8 +23,23 @@
   <body>
     <section class="login flex justify-center items-center h-[100vh] bg-beige">
       <div
-        class="px-10 overflow-hidden h-[80%] w-[90%] rounded-3xl flex flex-col justify-center items-center gap-3 shadow-2xl capitalize text-primary shadow-accent bg-gradient-to-r from-accent via-secondary to-accent"
+        class="relative px-10 overflow-hidden h-[80%] w-[90%] rounded-3xl flex flex-col justify-center items-center gap-3 shadow-2xl capitalize text-primary shadow-accent bg-gradient-to-r from-accent via-secondary to-accent"
       >
+        <div
+          class="hidden overlay-time absolute h-full w-full bg-text bg-opacity-50 grid flex justify-center items-center"
+        >
+          <div class="p-10 bg-background rounded-3xl flex flex-col">
+            <p class="text-center">your time is almost up</p>
+
+            <p>don't forget to submit your answers</p>
+            <br />
+            <button
+              class="ok py-1 px-3 rounded-lg ml-auto bg-primary text-beige"
+            >
+              ok
+            </button>
+          </div>
+        </div>
         <div class="px-10 flex justify-between w-full">
           <div class="timer"></div>
           <p class="capitalize">exam</p>

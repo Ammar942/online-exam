@@ -63,6 +63,7 @@ $(document).ready(() => {
     if (isValid) {
       saveToLocalStorage(fName, lName, email, pass);
       $("#signupForm")[0].reset();
+      window.location.replace("./startExam.html");
     }
     console.log(JSON.parse(localStorage.getItem("marina@gmail.com")));
   });
@@ -106,7 +107,10 @@ $(document).ready(() => {
       // console.log(email, user.email);
     } else if (!user || !(email === user.email)) {
       isValid = false;
-      showErrorMsg("#loginEmail", "no account with this email please login");
+      showErrorMsg(
+        "#loginEmail",
+        "no account with this email please create account"
+      );
     }
     // pass validation
     if (!pass) {
@@ -114,7 +118,7 @@ $(document).ready(() => {
       showErrorMsg("#loginPassword", "password is required");
     }
     // /////////////////////////////////////////////////////////////////////p
-    if (!user || !(pass === user.pass)) {
+    else if (!user || !(pass === user.pass)) {
       isValid = false;
       showErrorMsg("#loginPassword", "incorrect password");
     }
@@ -122,6 +126,7 @@ $(document).ready(() => {
       // saveToLocalStorage(fName, lName, email, pass);
       // currentUser = JSON.parse(localStorage.getItem(`${email}`));
       $("#loginForm")[0].reset();
+      window.location.replace("./startExam.html");
     }
     // console.log(currentUser);
   });
@@ -129,7 +134,7 @@ $(document).ready(() => {
   $(".btn")
     .eq(0)
     .on("click", () => {
-      window.location.replace("./login.html");
+      window.location.replace("./startExam.html");
     });
   // navigate to exam
   $(".start-exam")
@@ -137,5 +142,6 @@ $(document).ready(() => {
     .on("click", () => {
       getQuestions();
       window.location.replace("./exam.html");
+      localStorage.removeItem("studentAnswers");
     });
 });

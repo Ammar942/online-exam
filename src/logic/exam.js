@@ -10,13 +10,22 @@ function updateTimer() {
   if (remainingTime <= 60000) {
     $(".timer").eq(0).addClass("text-red-700");
   }
+  if (remainingTime <= 60000 && remainingTime >= 59000) {
+    console.log("🌲");
+    $(".overlay-time").removeClass("hidden");
+  }
   if (remainingTime <= 0) {
     clearInterval(timerInterval);
     $(".timer").eq(0).html("Time's up!");
+    window.location.replace("./timeout.html");
   }
 }
 updateTimer();
 timerInterval = setInterval(updateTimer, 1000);
+
+$(".ok").on("click", function () {
+  $(".overlay-time").addClass("hidden");
+});
 ////////////////////////////////////////////    display Questions   //////////////////////////////////////////
 const Question = JSON.parse(localStorage.getItem("Question"));
 let shuffledQuestions = [...Question].sort(() => Math.random() - 0.5);
@@ -217,6 +226,14 @@ $("#answers").on("change", ".ans-input", function (e) {
 $(".submit").on("click", function () {
   localStorage.setItem("studentAnswers", JSON.stringify(studentAnswers));
   console.log(`your grade is ${calcGrades()} out of ${Question.length}`); //!grades 3la ma-tofrag
+  let grade = calcGrades();
+  if (grade > Question.length / 2) {
+    console.log("success");
+    window.location.replace("./success.html");
+  } else {
+    console.log("fail");
+    window.location.replace("./fail.html");
+  }
 });
 ////////////////////////////////  calc grades   //////////////////////////////////
 function calcGrades() {
