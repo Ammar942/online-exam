@@ -21,11 +21,24 @@
         <div class="w-[30%]">
           <img src="../../images/start exam.svg" alt="start exam" />
         </div>
-        <button
-          class="start-exam p-3 rounded-2xl bg-primary text-beige hover:shadow-md hover:shadow-primary"
+        <!-- <button
+          class="start-exam p-3 rounded-2xl bg-primary text-beige transition-all ease-in-out duration-500 hover:shadow-md hover:shadow-primary"
         >
           start exam
+        </button> -->
+        <!-- <div class="flex items-center justify-center rounded-lg bg-primary"> -->
+        <button
+          class="start-exam relative overflow-hidden bg-blue-600 text-beige bg-primary px-4 py-2 font-medium rounded-lg group"
+        >
+          <span
+            class="absolute inset-60 bg-white opacity-0 transition-opacity duration-500 group-hover:opacity-75"
+          ></span>
+          <span
+            class="absolute inset-0 bg-gradient-to-r opacity-45 from-transparent via-white to-transparent transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out"
+          ></span>
+          <span class="relative z-10 capitalize">start exam</span>
         </button>
+        <!-- </div> -->
       </div>
     </section>
     <script type="module" src="../logic/main.js"></script>
