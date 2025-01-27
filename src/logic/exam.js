@@ -222,11 +222,14 @@ $("#answers").on("change", ".ans-input", function (e) {
 ////////////////////////////////  save answers in localStorage   //////////////////////////////////
 let grades = [];
 $(".submit").on("click", function () {
+  console.log("submit");
   localStorage.setItem("studentAnswers", JSON.stringify(studentAnswers));
   console.log(`your grade is ${calcGrades()} out of ${Question.length}`); //!grades 3la ma-tofrag
+  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  let grade = JSON.parse(localStorage.getItem("grade"));
+  let currentUserGrade = calcGrades();
   grades.push({ userEmail: `${currentUser.email}`, grade: currentUserGrade });
   localStorage.setItem("AllUsersGrades", JSON.stringify(grades));
-  let currentUserGrade = calcGrades();
   localStorage.setItem("grade", JSON.stringify(currentUserGrade));
   if (grade > Question.length / 2) {
     console.log("success");
