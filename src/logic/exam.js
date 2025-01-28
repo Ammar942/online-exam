@@ -10,13 +10,22 @@ function updateTimer() {
   if (remainingTime <= 60000) {
     $(".timer").eq(0).addClass("text-red-700");
   }
+  if (remainingTime <= 60000 && remainingTime >= 59000) {
+    console.log("🌲");
+    $(".overlay-time").removeClass("hidden");
+  }
   if (remainingTime <= 0) {
     clearInterval(timerInterval);
     $(".timer").eq(0).html("Time's up!");
+    window.location.replace("./timeout.html");
   }
 }
 updateTimer();
 timerInterval = setInterval(updateTimer, 1000);
+
+$(".ok").on("click", function () {
+  $(".overlay-time").addClass("hidden");
+});
 ////////////////////////////////////////////    display Questions   //////////////////////////////////////////
 const Question = JSON.parse(localStorage.getItem("Question"));
 let shuffledQuestions = [...Question].sort(() => Math.random() - 0.5);
@@ -47,14 +56,23 @@ function displayQuestions(i) {
     } else {
       $(".flag-icon").removeClass("fa-brands");
     }
+    //empty answers container
+    $("#answers").eq(0).empty();
+    //loop for question Answers to append //!test this case
     shuffledQuestions[i].answer.forEach((ans, index) => {
-      $(".answer").eq(index).html(ans.ans);
+      // console.log(ans.ans, index);
+      $("#answers").eq(0)
+        .append(` <label class="answer"><div class="p-1 rounded-lg border-2">
+               <input
+                  type="radio"
+                  name="${shuffledQuestions[currentIndex].question}"
+                  value="${ans.ans}"
+                  class="ans-input accent-primary hover:accent-primary"
+                  ${ans.isChecked === true ? "checked" : ""}
+                />
+                ${ans.ans}
+              </div></label> `);
     });
-    // $(".flag-icon");
-    // $(".answer").eq(0).html(`${Question[i].answer[0].ans}`);
-    // $(".answer").eq(1).html(`${Question[i].answer[1].ans}`);
-    // $(".answer").eq(2).html(`${Question[i].answer[2].ans}`);
-    // $(".answer").eq(3).html(`${Question[i].answer[3].ans}`);
   } else {
     $(".questionTitle")
       .eq(0)
@@ -66,23 +84,23 @@ function displayQuestions(i) {
     } else {
       $(".flag-icon").removeClass("fa-brands");
     }
+    //empty answers container
+    $("#answers").eq(0).empty();
+    //loop for question Answers to append
     shuffledQuestions[currentIndex].answer.forEach((ans, index) => {
-      $(".answer").eq(index).html(ans.ans);
+      console.log(ans);
+      $("#answers").eq(0)
+        .append(` <label class="answer"><div class="p-1 rounded-lg border-2">
+                 <input
+                    type="radio"
+                    name="${shuffledQuestions[currentIndex].question}"
+                    value="${ans.ans}"
+                    class="ans-input accent-primary hover:accent-primary"
+                    ${ans.isChecked === true ? "checked" : ""}
+                  />
+                  ${ans.ans}
+                </div></label> `);
     });
-
-    // $(".flag-icon");
-    // $(".answer")
-    //   .eq(0)
-    //   .html(`${Question[i || currentIndex].answer[0].ans}`);
-    // $(".answer")
-    //   .eq(1)
-    //   .html(`${Question[i || currentIndex].answer[1].ans}`);
-    // $(".answer")
-    //   .eq(2)
-    //   .html(`${Question[i || currentIndex].answer[2].ans}`);
-    // $(".answer")
-    //   .eq(3)
-    //   .html(`${Question[i || currentIndex].answer[3].ans}`);
   }
 }
 displayQuestions();
@@ -172,3 +190,74 @@ $("#markedQ").on("click", ".trash", function () {
     $(".flag-icon").removeClass("fa-brands");
   }
 });
+
+////////////////////////////////  save answers   //////////////////////////////////
+const studentAnswers = {}; //!set answer selected in ui
+$("#answers").on("change", ".ans-input", function (e) {
+  // console.log(shuffledQuestions);
+  Question.forEach((Q, i) => {
+    // i => questionIndexInOriginalObj;
+    if (Q.question === e.target.name) {
+      studentAnswers[i] = $(e.target).val();
+      $(e.target).attr("checked");
+
+      shuffledQuestions.forEach((ShufQ, i) => {
+        if (ShufQ.question === Q.question) {
+          ShufQ.answer.forEach((ans, i) => {
+            // console.log(ans.ans, $(e.target).val());
+            if (ans.ans === $(e.target).val()) {
+              ans.isChecked = true;
+            } else {
+              ans.isChecked = false;
+            }
+          });
+        }
+      });
+    }
+  });
+  console.log(shuffledQuestions);
+  console.log(studentAnswers);
+});
+
+////////////////////////////////  save answers in localStorage   //////////////////////////////////
+let grades = [];
+$(".submit").on("click", function () {
+  console.log("submit");
+  localStorage.setItem("studentAnswers", JSON.stringify(studentAnswers));
+  console.log(`your grade is ${calcGrades()} out of ${Question.length}`); //!grades 3la ma-tofrag
+  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  let grade = JSON.parse(localStorage.getItem("grade"));
+  let currentUserGrade = calcGrades();
+  grades.push({ userEmail: `${currentUser.email}`, grade: currentUserGrade });
+  localStorage.setItem("AllUsersGrades", JSON.stringify(grades));
+  localStorage.setItem("grade", JSON.stringify(currentUserGrade));
+  if (grade > Question.length / 2) {
+    console.log("success");
+    window.location.replace("./success.html");
+  } else {
+    console.log("fail");
+    window.location.replace("./fail.html");
+  }
+});
+////////////////////////////////  calc grades   //////////////////////////////////
+function calcGrades() {
+  let grade = 0;
+  const correctAnswers = getCorrectAnswers();
+  const studentAnswers = JSON.parse(localStorage.getItem("studentAnswers"));
+
+  console.log(correctAnswers);
+  correctAnswers.forEach((ans, i) => {
+    if (ans === studentAnswers[i]) {
+      grade++;
+    }
+  });
+  return grade;
+}
+function getCorrectAnswers() {
+  let correctAnswer = [];
+  Question.forEach((ques) => {
+    correctAnswer.push(ques.answer.filter((ans) => ans.isTrue)[0].ans);
+    // console.log(correctAnswer);
+  });
+  return correctAnswer;
+}

@@ -1,6 +1,9 @@
 import getQuestions from "./getQuestion.js";
 $(document).ready(() => {
   // localStorage.clear();
+  let users = [];
+  // localStorage.setItem("users", JSON.stringify(users));
+  users = JSON.parse(localStorage.getItem("users"));
   let currentUser;
   $("#goToSignup").on("click", () => {
     console.log("click");
@@ -25,6 +28,7 @@ $(document).ready(() => {
     const nameRegex = /^[a-zA-Z]{3,10}$/;
     const emailRegex = /^[a-zA-Z0-9._]+@(gmail|yahoo|outlook)+\.[a-z]{2,4}$/;
     let isValid = true;
+    let isExist = false;
     // firstName Validation
     if (!fName) {
       isValid = false;
@@ -42,6 +46,13 @@ $(document).ready(() => {
       showErrorMsg("#signUpLName", "please enter a valid name");
     }
     // email validation
+    if (localStorage.getItem("users")) {
+      users.forEach((u, i) => {
+        if (email === u.email) {
+          isExist = true;
+        }
+      });
+    }
     if (!email) {
       isValid = false;
       showErrorMsg("#signUpEmail", "email is required");
@@ -51,7 +62,11 @@ $(document).ready(() => {
         "#signUpEmail",
         "please enter a valid email (manosa.ammar@gmail.com)"
       );
+    } else if (isExist) {
+      isValid = false;
+      showErrorMsg("#signUpEmail", "this user is already exists please login");
     }
+
     if (!pass) {
       isValid = false;
       showErrorMsg("#signUpPassword", "password is required");
@@ -61,8 +76,10 @@ $(document).ready(() => {
       showErrorMsg("#signUpConfirmPassword", "password not match");
     }
     if (isValid) {
-      saveToLocalStorage(fName, lName, email, pass);
+      currentUser = saveToLocalStorage(fName, lName, email, pass);
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
       $("#signupForm")[0].reset();
+      window.location.replace("./startExam.html");
     }
     console.log(JSON.parse(localStorage.getItem("marina@gmail.com")));
   });
@@ -79,20 +96,32 @@ $(document).ready(() => {
       email: email,
       pass: pass,
     };
-    localStorage.setItem(`${email}`, JSON.stringify(userInfo));
+    console.log("before", users);
+    users.push(userInfo);
+    console.log("after", users);
+
+    localStorage.setItem(`users`, JSON.stringify(users));
+    return userInfo;
   };
 
   $("#loginForm").on("submit", (e) => {
     e.preventDefault();
     $(".err-msg").remove();
     $("input").removeClass("border-red-700");
-
+    let user;
     const email = $("#loginEmail").val();
     const pass = $("#loginPassword").val();
     const emailRegex = /^[a-zA-Z0-9._]+@(gmail|yahoo|outlook)+\.[a-z]{2,4}$/;
-    let user = JSON.parse(localStorage.getItem(`${email}`));
-    console.log(email);
+    if (localStorage.getItem("users")) {
+      users.forEach((u, i) => {
+        if (email === u.email) {
+          user = u;
+        }
+      });
+    }
     let isValid = true;
+
+    console.log(email);
     // email validation
     if (!email) {
       isValid = false;
@@ -103,10 +132,12 @@ $(document).ready(() => {
         "#loginEmail",
         "please enter a valid email (manosa.ammar@gmail.com)"
       );
-      // console.log(email, user.email);
     } else if (!user || !(email === user.email)) {
       isValid = false;
-      showErrorMsg("#loginEmail", "no account with this email please login");
+      showErrorMsg(
+        "#loginEmail",
+        "no account with this email please create account"
+      );
     }
     // pass validation
     if (!pass) {
@@ -114,14 +145,18 @@ $(document).ready(() => {
       showErrorMsg("#loginPassword", "password is required");
     }
     // /////////////////////////////////////////////////////////////////////p
-    if (!user || !(pass === user.pass)) {
+    else if (!user || !(pass === user.pass)) {
       isValid = false;
       showErrorMsg("#loginPassword", "incorrect password");
     }
+
     if (isValid) {
       // saveToLocalStorage(fName, lName, email, pass);
       // currentUser = JSON.parse(localStorage.getItem(`${email}`));
+      currentUser = user;
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
       $("#loginForm")[0].reset();
+      window.location.replace("./startExam.html");
     }
     // console.log(currentUser);
   });
@@ -129,7 +164,7 @@ $(document).ready(() => {
   $(".btn")
     .eq(0)
     .on("click", () => {
-      window.location.replace("./login.html");
+      window.location.replace("./startExam.html");
     });
   // navigate to exam
   $(".start-exam")
@@ -137,5 +172,6 @@ $(document).ready(() => {
     .on("click", () => {
       getQuestions();
       window.location.replace("./exam.html");
+      localStorage.removeItem("studentAnswers");
     });
 });
