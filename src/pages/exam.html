@@ -42,7 +42,7 @@
         </div>
         <div class="px-10 flex justify-between w-full">
           <div class="timer"></div>
-          <p class="capitalize">exam</p>
+          <!-- <p class="capitalize">exam</p> -->
         </div>
         <div id="ques-marked" class="w-full flex justify-between gap-5">
           <div
@@ -82,6 +82,7 @@
               <button>
                 <i class="left fa-solid fa-chevron-left text-2xl"></i>
               </button>
+              <span class="questionNumber"></span>
               <button>
                 <i class="right fa-solid fa-chevron-right text-2xl"></i>
               </button>
@@ -95,7 +96,10 @@
           <div id="markedQ" class="p-2 rounded-lg bg-accent w-[40%]">
             <p class="text-center mb-2">marked questions</p>
             <hr class="text-primary w-full h-1" />
-            <div class="flagged flex flex-col justify-between gap-4"></div>
+            <br />
+            <div
+              class="px-4 flagged flex flex-col justify-between gap-4 h-fit max-h-80 overflow-y-auto scrollbar-custom"
+            ></div>
           </div>
         </div>
       </div>

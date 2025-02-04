@@ -3,3 +3,23 @@
   cursor: not-allowed;
   pointer-events: none;
 }
+@layer utilities {
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background: #551a67;
+    /* background: theme("colors.primary"); */
+    border-radius: 4px;
+    visibility: visible; /* Initially hidden */
+  }
+  .scrollbar-custom::-webkit-scrollbar-track {
+    border-radius: 4px;
+    background: #c9abbc; /* Using secondary color */
+  }
+
+  .scrollbar-custom:hover::-webkit-scrollbar-thumb {
+    visibility: visible; /* Visible on hover */
+  }
+}

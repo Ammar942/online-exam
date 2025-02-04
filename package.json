@@ -6,5 +6,9 @@
   },
   "scripts": {
     "build:css": "npx tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch"
+  },
+  "dependencies": {
+    "tailwind-scrollbar": "^3.0.2",
+    "tailwind-scrollbar-hide": "^2.0.0"
   }
 }

@@ -1,4 +1,4 @@
-import getQuestions from "./getQuestion.js";
+// localStorage.removeItem("Question");
 $(document).ready(() => {
   // localStorage.clear();
   let users = [];
@@ -167,11 +167,28 @@ $(document).ready(() => {
       window.location.replace("./startExam.html");
     });
   // navigate to exam
-  $(".start-exam")
-    .eq(0)
-    .on("click", () => {
-      getQuestions();
-      window.location.replace("./exam.html");
-      localStorage.removeItem("studentAnswers");
-    });
+  // getQuestions();
+  // $(".start-exam")
+  //   .eq(0)
+  //   .on("click", () => {
+  //     let isError = localStorage.getItem("QuestionError");
+  //     console.log(isError);
+  //     // console.log(localStorage.getItem("QuestionError"));
+  //     if (isError === "false") {
+  //       window.location.replace("./exam.html");
+  //       localStorage.removeItem("studentAnswers");
+  //       localStorage.removeItem("remainingTime");
+  //     } else {
+  //       window.location.replace("./timeout.html");
+  //     }
+  //     // try {
+  //     //   if (funreturn) getQuestions();
+  //     //   // window.location.replace("./exam.html");
+  //     //   localStorage.removeItem("studentAnswers");
+  //     //   localStorage.removeItem("remainingTime");
+  //     // } catch (error) {
+  //     //   console.log("error", error);
+  //     //   window.location.replace("./timeout.html");
+  //     // }
+  //   });
 });
