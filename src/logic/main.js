@@ -9,11 +9,25 @@ $(document).ready(() => {
     console.log("click");
     sliding.classList.remove("translate-x-0");
     sliding.classList.add("translate-x-full");
+    $(".signup").removeClass("hidden");
+    $(".signup").removeClass("md:flex");
+    $(".signup").addClass("flex");
+    $(".login").removeClass("flex");
+    $(".login").addClass("md:flex");
+    $(".login").addClass("hidden");
+    $("#loginForm")[0].reset();
   });
   $("#goToLogin").on("click", () => {
     console.log("click");
     sliding.classList.remove("translate-x-full");
     sliding.classList.add("translate-x-0");
+    $(".signup").removeClass("flex");
+    $(".signup").addClass("hidden");
+    $(".signup").addClass("md:flex");
+    $(".login").removeClass("hidden");
+    $(".login").removeClass("md:flex");
+    $(".login").addClass("flex");
+    $("#signupForm")[0].reset();
   });
   $("#signupForm").on("submit", (e) => {
     e.preventDefault();

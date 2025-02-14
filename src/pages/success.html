@@ -21,20 +21,26 @@
         class="p-10 overflow-hidden h-[80%] w-[90%] rounded-3xl flex flex-col justify-center items-center gap-3 shadow-2xl capitalize text-primary shadow-primary bg-gradient-to-r from-accent via-secondary to-accent"
       >
         <h1 class="text-white text-center font-bold text-4xl">Result</h1>
-        <div class="w-[25%]">
+        <div class="md:w-[20%] w-[80%]">
           <img src="../../images/success.svg" alt="successful" />
         </div>
         <!-- <div class="text-container text-center text-white"> -->
-        <p class="congrats-msg">
+        <p class="congrats-msg text-center">
           congratulations <span class="user-name"></span>, Your grade is
           <span class="grade"></span>
         </p>
         <p class="">Try again ya sa7bi,you can do it</p>
         <!-- </div> -->
         <button
-          class="btn text-dark-purple rounded-2xl px-4 py-1 font-bold hover:bg-purple-950 hover:text-light-purple bg-white"
+          class="btn relative overflow-hidden bg-blue-600 text-beige bg-primary px-4 py-2 font-medium rounded-lg group"
         >
-          Re-Exam
+          <span
+            class="absolute inset-60 bg-white opacity-0 transition-opacity duration-500 group-hover:opacity-75"
+          ></span>
+          <span
+            class="absolute inset-0 bg-gradient-to-r opacity-45 from-transparent via-white to-transparent transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out"
+          ></span>
+          <span class="relative z-10 capitalize">Re-Exam</span>
         </button>
       </div>
     </section>
