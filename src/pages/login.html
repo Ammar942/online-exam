@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../styles/login.css" />
   </head>
   <body>
-    <section class="login flex justify-center items-center h-[100vh] bg-beige">
+    <section class="flex justify-center items-center h-[100vh] bg-beige">
       <div
         class="relative overflow-hidden h-[80%] w-[90%] rounded-3xl flex shadow-2xl capitalize text-primary shadow-primary bg-secondary"
       >
@@ -23,13 +23,13 @@
         <!-- ! rounded issues  -->
         <div
           id="sliding"
-          class="tran absolute top-0 left-0 h-full transform transition-transform duration-1000 ease-in-out rounded-3xl w-[50%] hidden md:flex justify-center items-center shadow-2xl shadow-medium-purple bg-gradient-to-r from-primary via-accent to-primary"
+          class="tran z-50 absolute top-0 left-0 h-full transform transition-transform duration-1000 ease-in-out rounded-3xl w-[50%] hidden md:flex justify-center items-center shadow-2xl shadow-medium-purple bg-gradient-to-r from-primary via-accent to-primary"
         >
           <img src="../../images/login.svg" alt="login" class="h-full" />
         </div>
         <!-- ?signup -->
         <div
-          class="w-[100%] md:w-[50%] flex flex-col justify-center items-center py-4"
+          class="signup w-[100%] md:w-[50%] hidden md:flex flex-col justify-center items-center py-4"
         >
           <h1 class="text-4xl font-bold capitalize">sign up</h1>
           <form
@@ -110,12 +110,18 @@
             <button
               type="submit"
               id="signupSubmitBtn"
-              class="col-span-2 p-2 bg-primary text-beige rounded-3xl shadow-md shadow-primary hover:shadow-lg hover:shadow-primary"
+              class="col-span-2 relative overflow-hidden bg-blue-600 text-beige bg-primary px-4 py-2 font-medium rounded-lg group"
             >
-              sign up
+              <span
+                class="absolute inset-60 bg-white opacity-0 transition-opacity duration-500 group-hover:opacity-75"
+              ></span>
+              <span
+                class="absolute inset-0 bg-gradient-to-r opacity-45 from-transparent via-white to-transparent transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out"
+              ></span>
+              <span class="relative z-10 capitalize">sign up</span>
             </button>
           </form>
-          <p class="font-thin">
+          <p class="font-thin flex">
             already have an account.
             <button
               id="goToLogin"
@@ -128,7 +134,7 @@
         <!--? login -->
         <!--  bg-any except white did not work => because i override the tailwind configuration and all colors gone  -->
         <div
-          class="w-[100%] md:w-[50%] flex flex-col justify-center items-center"
+          class="login w-[100%] md:w-[50%] flex flex-col justify-center items-center"
         >
           <h1 class="text-4xl font-bold capitalize">login</h1>
           <form
@@ -166,21 +172,28 @@
             <br />
             <button
               type="submit"
-              class="p-2 bg-primary text-beige rounded-3xl shadow-md shadow-primary hover:shadow-lg hover:shadow-primary"
+              class="relative overflow-hidden bg-blue-600 text-beige bg-primary px-4 py-2 font-medium rounded-lg group"
             >
-              login
+              <span
+                class="absolute inset-60 bg-white opacity-0 transition-opacity duration-500 group-hover:opacity-75"
+              ></span>
+              <span
+                class="absolute inset-0 bg-gradient-to-r opacity-45 from-transparent via-white to-transparent transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out"
+              ></span>
+              <span class="relative z-10 capitalize">login</span>
             </button>
           </form>
           <br />
           <button
             id="goToSignup"
-            class="signup capitalize font-normal underline cursor-pointer"
+            class="capitalize font-normal underline cursor-pointer"
           >
             create account
           </button>
         </div>
       </div>
     </section>
+    <!-- <script src="../logic/login.js"></script> -->
     <script type="module" src="../logic/main.js"></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-import getQuestions from "./getQuestion.js";
+// localStorage.removeItem("Question");
 $(document).ready(() => {
   // localStorage.clear();
   let users = [];
@@ -9,11 +9,25 @@ $(document).ready(() => {
     console.log("click");
     sliding.classList.remove("translate-x-0");
     sliding.classList.add("translate-x-full");
+    $(".signup").removeClass("hidden");
+    $(".signup").removeClass("md:flex");
+    $(".signup").addClass("flex");
+    $(".login").removeClass("flex");
+    $(".login").addClass("md:flex");
+    $(".login").addClass("hidden");
+    $("#loginForm")[0].reset();
   });
   $("#goToLogin").on("click", () => {
     console.log("click");
     sliding.classList.remove("translate-x-full");
     sliding.classList.add("translate-x-0");
+    $(".signup").removeClass("flex");
+    $(".signup").addClass("hidden");
+    $(".signup").addClass("md:flex");
+    $(".login").removeClass("hidden");
+    $(".login").removeClass("md:flex");
+    $(".login").addClass("flex");
+    $("#signupForm")[0].reset();
   });
   $("#signupForm").on("submit", (e) => {
     e.preventDefault();
@@ -167,11 +181,28 @@ $(document).ready(() => {
       window.location.replace("./startExam.html");
     });
   // navigate to exam
-  $(".start-exam")
-    .eq(0)
-    .on("click", () => {
-      getQuestions();
-      window.location.replace("./exam.html");
-      localStorage.removeItem("studentAnswers");
-    });
+  // getQuestions();
+  // $(".start-exam")
+  //   .eq(0)
+  //   .on("click", () => {
+  //     let isError = localStorage.getItem("QuestionError");
+  //     console.log(isError);
+  //     // console.log(localStorage.getItem("QuestionError"));
+  //     if (isError === "false") {
+  //       window.location.replace("./exam.html");
+  //       localStorage.removeItem("studentAnswers");
+  //       localStorage.removeItem("remainingTime");
+  //     } else {
+  //       window.location.replace("./timeout.html");
+  //     }
+  //     // try {
+  //     //   if (funreturn) getQuestions();
+  //     //   // window.location.replace("./exam.html");
+  //     //   localStorage.removeItem("studentAnswers");
+  //     //   localStorage.removeItem("remainingTime");
+  //     // } catch (error) {
+  //     //   console.log("error", error);
+  //     //   window.location.replace("./timeout.html");
+  //     // }
+  //   });
 });
