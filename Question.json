@@ -61,5 +61,90 @@
       { "ans": "It sorts elements of an array.", "isTrue": false }
     ],
     "isFlagged": false
+  },
+  {
+    "question": "What will 'typeof Symbol()' return?",
+    "answer": [
+      { "ans": "'symbol'", "isTrue": true },
+      { "ans": "'object'", "isTrue": false },
+      { "ans": "'function'", "isTrue": false },
+      { "ans": "'undefined'", "isTrue": false }
+    ],
+    "isFlagged": false
+  },
+  {
+    "question": "Which statement about ES6 classes is correct?",
+    "answer": [
+      {
+        "ans": "They use prototype-based inheritance under the hood.",
+        "isTrue": true
+      },
+      { "ans": "They cannot have constructors.", "isTrue": false },
+      { "ans": "They do not support inheritance.", "isTrue": false },
+      {
+        "ans": "They are executed before variable declarations.",
+        "isTrue": false
+      }
+    ],
+    "isFlagged": false
+  },
+  {
+    "question": "How do you iterate over a 'Map' in ES6?",
+    "answer": [
+      { "ans": "Using for-of loop.", "isTrue": true },
+      { "ans": "Using for-in loop.", "isTrue": false },
+      { "ans": "Using Object.keys().", "isTrue": false },
+      { "ans": "Using Object.entries().", "isTrue": false }
+    ],
+    "isFlagged": false
+  },
+  {
+    "question": "What does the 'rest' operator do in ES6?",
+    "answer": [
+      {
+        "ans": "Collects remaining function arguments into an array.",
+        "isTrue": true
+      },
+      {
+        "ans": "Spreads elements of an array into function arguments.",
+        "isTrue": false
+      },
+      { "ans": "Creates a copy of an array.", "isTrue": false },
+      { "ans": "Removes duplicate elements from an array.", "isTrue": false }
+    ],
+    "isFlagged": false
+  },
+  {
+    "question": "Which of the following statements about destructuring is correct?",
+    "answer": [
+      {
+        "ans": "It allows extracting values from arrays and objects.",
+        "isTrue": true
+      },
+      { "ans": "It is used only with arrays.", "isTrue": false },
+      { "ans": "It only works with objects.", "isTrue": false },
+      { "ans": "It modifies the original object or array.", "isTrue": false }
+    ],
+    "isFlagged": false
+  },
+  {
+    "question": "What does 'Symbol()' do in ES6?",
+    "answer": [
+      { "ans": "Creates a new unique identifier.", "isTrue": true },
+      { "ans": "Creates a new object.", "isTrue": false },
+      { "ans": "Defines a class.", "isTrue": false },
+      { "ans": "Declares a variable.", "isTrue": false }
+    ],
+    "isFlagged": false
+  },
+  {
+    "question": "Which method is used to merge multiple arrays into one in ES6?",
+    "answer": [
+      { "ans": "Array.concat()", "isTrue": true },
+      { "ans": "Array.merge()", "isTrue": false },
+      { "ans": "Array.append()", "isTrue": false },
+      { "ans": "Array.extend()", "isTrue": false }
+    ],
+    "isFlagged": false
   }
 ]

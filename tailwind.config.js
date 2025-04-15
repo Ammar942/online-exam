@@ -21,6 +21,8 @@ module.exports = {
       white: "#ffffff",
       transparent: colors.transparent,
       red: colors.red,
+      green: colors.green,
+      blue: colors.blue,
     },
   },
   plugins: [require("tailwind-scrollbar-hide"), require("tailwind-scrollbar")],

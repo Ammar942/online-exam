@@ -1,12 +1,11 @@
-// localStorage.removeItem("Question");
 $(document).ready(() => {
-  // localStorage.clear();
   let users = [];
-  // localStorage.setItem("users", JSON.stringify(users));
+  let isValidSignUp;
+  let isValidLogin;
   users = JSON.parse(localStorage.getItem("users"));
   let currentUser;
+  //click create Account
   $("#goToSignup").on("click", () => {
-    console.log("click");
     sliding.classList.remove("translate-x-0");
     sliding.classList.add("translate-x-full");
     $(".signup").removeClass("hidden");
@@ -16,9 +15,11 @@ $(document).ready(() => {
     $(".login").addClass("md:flex");
     $(".login").addClass("hidden");
     $("#loginForm")[0].reset();
+    $(".err-msg").remove();
+    $("input").removeClass("border-red-700");
   });
+  //click back to login
   $("#goToLogin").on("click", () => {
-    console.log("click");
     sliding.classList.remove("translate-x-full");
     sliding.classList.add("translate-x-0");
     $(".signup").removeClass("flex");
@@ -28,6 +29,8 @@ $(document).ready(() => {
     $(".login").removeClass("md:flex");
     $(".login").addClass("flex");
     $("#signupForm")[0].reset();
+    $(".err-msg").remove();
+    $("input").removeClass("border-red-700");
   });
   $("#signupForm").on("submit", (e) => {
     e.preventDefault();
@@ -41,22 +44,22 @@ $(document).ready(() => {
 
     const nameRegex = /^[a-zA-Z]{3,10}$/;
     const emailRegex = /^[a-zA-Z0-9._]+@(gmail|yahoo|outlook)+\.[a-z]{2,4}$/;
-    let isValid = true;
+    isValidSignUp = true;
     let isExist = false;
     // firstName Validation
     if (!fName) {
-      isValid = false;
+      isValidSignUp = false;
       showErrorMsg("#signUpFName", "first name is required");
     } else if (!nameRegex.test(fName)) {
-      isValid = false;
+      isValidSignUp = false;
       showErrorMsg("#signUpFName", "please enter a valid name");
     }
     // lastName Validation
     if (!lName) {
-      isValid = false;
+      isValidSignUp = false;
       showErrorMsg("#signUpLName", "first name is required");
     } else if (!nameRegex.test(lName)) {
-      isValid = false;
+      isValidSignUp = false;
       showErrorMsg("#signUpLName", "please enter a valid name");
     }
     // email validation
@@ -68,28 +71,28 @@ $(document).ready(() => {
       });
     }
     if (!email) {
-      isValid = false;
+      isValidSignUp = false;
       showErrorMsg("#signUpEmail", "email is required");
     } else if (!emailRegex.test(email)) {
-      isValid = false;
+      isValidSignUp = false;
       showErrorMsg(
         "#signUpEmail",
         "please enter a valid email (manosa.ammar@gmail.com)"
       );
     } else if (isExist) {
-      isValid = false;
+      isValidSignUp = false;
       showErrorMsg("#signUpEmail", "this user is already exists please login");
     }
 
     if (!pass) {
-      isValid = false;
+      isValidSignUp = false;
       showErrorMsg("#signUpPassword", "password is required");
     }
     if (pass !== confirmPass) {
-      isValid = false;
+      isValidSignUp = false;
       showErrorMsg("#signUpConfirmPassword", "password not match");
     }
-    if (isValid) {
+    if (isValidSignUp) {
       currentUser = saveToLocalStorage(fName, lName, email, pass);
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
       $("#signupForm")[0].reset();
@@ -110,9 +113,7 @@ $(document).ready(() => {
       email: email,
       pass: pass,
     };
-    console.log("before", users);
     users.push(userInfo);
-    console.log("after", users);
 
     localStorage.setItem(`users`, JSON.stringify(users));
     return userInfo;
@@ -133,21 +134,20 @@ $(document).ready(() => {
         }
       });
     }
-    let isValid = true;
+    isValidLogin = true;
 
-    console.log(email);
     // email validation
     if (!email) {
-      isValid = false;
+      isValidLogin = false;
       showErrorMsg("#loginEmail", "email is required");
     } else if (!emailRegex.test(email)) {
-      isValid = false;
+      isValidLogin = false;
       showErrorMsg(
         "#loginEmail",
         "please enter a valid email (manosa.ammar@gmail.com)"
       );
     } else if (!user || !(email === user.email)) {
-      isValid = false;
+      isValidLogin = false;
       showErrorMsg(
         "#loginEmail",
         "no account with this email please create account"
@@ -155,24 +155,21 @@ $(document).ready(() => {
     }
     // pass validation
     if (!pass) {
-      isValid = false;
+      isValidLogin = false;
       showErrorMsg("#loginPassword", "password is required");
     }
-    // /////////////////////////////////////////////////////////////////////p
+    // /////////////////////////////////////////////////////////////////////
     else if (!user || !(pass === user.pass)) {
-      isValid = false;
+      isValidLogin = false;
       showErrorMsg("#loginPassword", "incorrect password");
     }
 
-    if (isValid) {
-      // saveToLocalStorage(fName, lName, email, pass);
-      // currentUser = JSON.parse(localStorage.getItem(`${email}`));
+    if (isValidLogin) {
       currentUser = user;
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
       $("#loginForm")[0].reset();
       window.location.replace("./startExam.html");
     }
-    // console.log(currentUser);
   });
   // navigate to login
   $(".btn")
@@ -180,29 +177,4 @@ $(document).ready(() => {
     .on("click", () => {
       window.location.replace("./startExam.html");
     });
-  // navigate to exam
-  // getQuestions();
-  // $(".start-exam")
-  //   .eq(0)
-  //   .on("click", () => {
-  //     let isError = localStorage.getItem("QuestionError");
-  //     console.log(isError);
-  //     // console.log(localStorage.getItem("QuestionError"));
-  //     if (isError === "false") {
-  //       window.location.replace("./exam.html");
-  //       localStorage.removeItem("studentAnswers");
-  //       localStorage.removeItem("remainingTime");
-  //     } else {
-  //       window.location.replace("./timeout.html");
-  //     }
-  //     // try {
-  //     //   if (funreturn) getQuestions();
-  //     //   // window.location.replace("./exam.html");
-  //     //   localStorage.removeItem("studentAnswers");
-  //     //   localStorage.removeItem("remainingTime");
-  //     // } catch (error) {
-  //     //   console.log("error", error);
-  //     //   window.location.replace("./timeout.html");
-  //     // }
-  //   });
 });
