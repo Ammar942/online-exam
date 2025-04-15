@@ -1,22 +1,18 @@
 import getQuestions from "./getQuestion.js";
 
-console.log("start");
 localStorage.removeItem("Question");
 localStorage.removeItem("QuestionError");
 localStorage.removeItem("grade");
 localStorage.removeItem("remainingTime");
 // let Question ;
-async function ay7aga() {
+async function start() {
   await getQuestions();
   const Question = JSON.parse(localStorage.getItem("Question"));
-  console.log(Question);
   $(".start-exam")
     .eq(0)
     .on("click", () => {
       let isError = localStorage.getItem("QuestionError");
-      console.log(isError);
       if (isError === "false") {
-        //   console.log(Question);
         if (Question.length) {
           window.location.replace("./exam.html");
         } else {
@@ -29,4 +25,4 @@ async function ay7aga() {
       }
     });
 }
-ay7aga();
+start();
