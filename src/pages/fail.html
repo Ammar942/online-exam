@@ -26,7 +26,7 @@
           <div class="img-container">
             <img src="../../images/fail.svg" class="pt-5" alt="fail exam" />
           </div>
-          <div class="text-container text-center text-white txt">
+          <div class="text-container text-center text-primary txt">
             <p class="">Yalhwy , Your grade is <span class="grade"></span></p>
             <p class="capitalize">
               Sorry <span class="user-name"></span>,You failed in this quiz
@@ -34,9 +34,15 @@
           </div>
         </div>
         <button
-          class="btn text-dark-purple bg-white rounded-2xl px-4 py-1 mt-1 font-bold transition-all ease-in-out duration-500 hover:bg-primary hover:text-beige"
+          class="btn relative overflow-hidden bg-blue-600 text-beige bg-primary px-4 py-2 font-medium rounded-lg group"
         >
-          Re-Exam
+          <span
+            class="absolute inset-60 bg-white opacity-0 transition-opacity duration-500 group-hover:opacity-75"
+          ></span>
+          <span
+            class="absolute inset-0 bg-gradient-to-r opacity-45 from-transparent via-white to-transparent transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out"
+          ></span>
+          <span class="relative z-10 capitalize">Re-Exam</span>
         </button>
       </div>
     </section>

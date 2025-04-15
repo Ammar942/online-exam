@@ -10,6 +10,7 @@ module.exports = {
         "light-purple": "#e0d0f3",
         beige: "#edeadb",
       },
+      scrollbar: ["rounded"],
     },
     colors: {
       text: "#09070a",
@@ -20,7 +21,9 @@ module.exports = {
       white: "#ffffff",
       transparent: colors.transparent,
       red: colors.red,
+      green: colors.green,
+      blue: colors.blue,
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide"), require("tailwind-scrollbar")],
 };

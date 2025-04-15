@@ -19,6 +19,7 @@
     />
     <link rel="stylesheet" href="../../dist/styles.css" />
     <link rel="stylesheet" href="../styles/exam.css" />
+    <link rel="stylesheet" href="../deadline loading/deadline-loading.css" />
   </head>
   <body>
     <section class="login flex justify-center items-center h-[100vh] bg-beige">
@@ -26,7 +27,7 @@
         class="relative px-10 overflow-hidden h-[80%] w-[90%] rounded-3xl flex flex-col justify-center items-center gap-3 shadow-2xl capitalize text-primary shadow-accent bg-gradient-to-r from-accent via-secondary to-accent"
       >
         <div
-          class="hidden overlay-time absolute h-full w-full bg-text bg-opacity-50 grid flex justify-center items-center"
+          class="hidden z-20 overlay-time absolute h-full w-full bg-text bg-opacity-50 grid flex justify-center items-center"
         >
           <div class="p-10 bg-background rounded-3xl flex flex-col">
             <p class="text-center">your time is almost up</p>
@@ -34,23 +35,31 @@
             <p>don't forget to submit your answers</p>
             <br />
             <button
-              class="ok py-1 px-3 rounded-lg ml-auto bg-primary text-beige"
+              class="ok relative overflow-hidden text-beige bg-primary px-4 py-2 font-medium rounded-lg group"
             >
-              ok
+              <span
+                class="absolute inset-60 bg-white opacity-0 transition-opacity duration-500 group-hover:opacity-75"
+              ></span>
+              <span
+                class="absolute inset-0 bg-gradient-to-r opacity-45 from-transparent via-white to-transparent transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out"
+              ></span>
+              <span class="relative z-10 capitalize">Ok</span>
             </button>
           </div>
         </div>
-        <div class="px-10 flex justify-between w-full">
+        <div class="timer-container relative px-10 flex justify-between w-full">
           <div class="timer"></div>
-          <p class="capitalize">exam</p>
         </div>
-        <div id="ques-marked" class="w-full flex justify-between gap-5">
+        <div
+          id="ques-marked"
+          class="w-full md:pt-5 pt-0 flex flex-col md:flex-row justify-between gap-5"
+        >
           <div
             id="Q"
-            class="p-2 w-[80%] flex flex-col justify-start self-start rounded-lg"
+            class="p-2 md:w-[80%] w-full flex flex-col justify-start self-start rounded-lg"
           >
             <div class="flex">
-              <p class="questionTitle w-full lowercase mb-6"></p>
+              <p class="questionTitle w-full lowercase mb-6 ml-4"></p>
               <span class="flag"
                 ><i class="flag-icon fa-regular fa-font-awesome"></i
               ></span>
@@ -78,24 +87,34 @@
                 <label class="answer">answer 4</label>
               </div> -->
             </div>
-            <div class="p-5 flex justify-center gap-36">
+            <div class="p-5 flex justify-center items-center gap-5">
               <button>
-                <i class="left fa-solid fa-chevron-left text-2xl"></i>
+                <i class="p-2 left fa-solid fa-chevron-left text-2xl"></i>
               </button>
+              <span class="questionNumber w-[20%] text-center"></span>
               <button>
-                <i class="right fa-solid fa-chevron-right text-2xl"></i>
+                <i class="p-2 right fa-solid fa-chevron-right text-2xl"></i>
               </button>
             </div>
             <button
-              class="submit w-fit py-2 px-4 rounded-lg bg-primary text-beige self-end"
+              class="submit w-fit self-end relative overflow-hidden bg-blue-600 text-beige bg-primary px-4 py-2 font-medium rounded-lg group"
             >
-              submit
+              <span
+                class="absolute inset-60 bg-white opacity-0 transition-opacity duration-500 group-hover:opacity-75"
+              ></span>
+              <span
+                class="absolute inset-0 bg-gradient-to-r opacity-45 from-transparent via-white to-transparent transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out"
+              ></span>
+              <span class="relative z-10 capitalize">submit</span>
             </button>
           </div>
-          <div id="markedQ" class="p-2 rounded-lg bg-accent w-[40%]">
+          <div id="markedQ" class="p-2 w-full rounded-lg bg-accent md:w-[40%]">
             <p class="text-center mb-2">marked questions</p>
             <hr class="text-primary w-full h-1" />
-            <div class="flagged flex flex-col justify-between gap-4"></div>
+            <br />
+            <div
+              class="px-4 flagged flex flex-col justify-between gap-4 h-10 md:h-fit md:max-h-80 overflow-y-auto scrollbar-custom"
+            ></div>
           </div>
         </div>
       </div>
